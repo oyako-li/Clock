@@ -37,9 +37,9 @@ app.whenReady().then(() => {
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-  document.getElementById('create-alert').addEventListener('click', ()=>{
-    ipcRenderer.send('add-alert');
-  })
+  // document.getElementById('create-alert').addEventListener('click', ()=>{
+  //   ipcRenderer.send('add-alert');
+  // })
 })
 
 ipcMain.on('add-alert', ()=>{

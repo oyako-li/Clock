@@ -2,11 +2,8 @@ import './App.css';
 import {useState} from 'react';
 
 
-const NOTIFICATION_TITLE = 'One munit';
 const START_TITLE = "Let's get start";
 const BREAK_TITLE = "Take a break";
-const NOTIFICATION_BODY = 'Anounse One Munit';
-// const CLICK_MESSAGE = 'Notification clicked!';
 let second=0;
 let day;
 
@@ -81,7 +78,7 @@ const App = () => {
   )
 };
 
-const notify = setInterval(()=>{
+setInterval(()=>{
   let minutes = day.getMinutes();
   if(minutes===0){
     new Notification(START_TITLE, {body: "0 time up, So you should start."}).show();

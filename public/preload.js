@@ -1,7 +1,8 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld('alertAPI',{
-    get: ()=>ipcRenderer.invoke('get-alerts'),
+contextBridge.exposeInMainWorld('alertApi',{
+    load: ()=>ipcRenderer.invoke('load-alert'),
+    get: ()=>ipcRenderer.invoke('get-alert'),
     create: (data)=>ipcRenderer.invoke('create-alert'),
     delete: (target)=>ipcRenderer.invoke('delete-alert'),
     activate: (target)=>ipcRenderer.invoke('activate-alert'),

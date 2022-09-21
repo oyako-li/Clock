@@ -12,7 +12,7 @@ const TimeSign = () => {
   for(let i=1; i<13; i++) items.push(<span style={{"--i": i}}><b>{i}</b></span>);
   return (
     <>
-      {items}
+        {items}
     </>
   )
 };
@@ -36,14 +36,6 @@ const TimeHandrer = () => {
         }
         clearInterval(clock);
     }, 1000);
-
-    // if (day.getSeconds()!==ss){
-    //     setSs(day.getSeconds());
-    //     if(ss===0){
-    //         setMm(day.getMinutes());
-    //         setHh(day.getHours());
-    //     }
-    // }
   
 
   return (
@@ -57,16 +49,9 @@ const TimeHandrer = () => {
 
 const AlertSetting = () => {
   const [styles, setStyles] = useState({'--clr': '#43658b'});
-  const [state, setState] = useState(false);
   
-  function handleAddAlerm() {
-    if(!state){
-      setStyles({'--clr': '#43658b', opacity: 0.7, borderRadius: '10%', width: '80%', height: '80%'});
-
-    }else{
-      setStyles({'--clr': '#43658b'});
-    }
-    setState(!state);
+  async function handleAddAlerm() {
+    await window.alertApi.load();
   }
 
   return (
@@ -85,27 +70,5 @@ const App = () => {
     </div>
   )
 };
-// setInterval(()=>{
-//     day = new Date();
-//     console.log(day.getSeconds());
-// }, 1000);
-
-// setInterval(()=>{
-//   let minutes = day.getMinutes();
-//   if(minutes===0){
-//     new Notification(START_TITLE, {body: "0 time up, So you should start."});
-//   } else if(minutes===25){
-//     new Notification(BREAK_TITLE, {body: "25 time up, So you should rest."});
-//   } else if(minutes===30){
-//     new Notification(START_TITLE, {body: "30 time up, So you should start."});
-//   } else if(minutes===55){
-//     new Notification(BREAK_TITLE, {body: "55 time up, So you should rest."});
-//   }
-// }, 60000);
-// setInterval(()=>{
-//   if(second===0){
-//     new Notification(START_TITLE, {body: "1mun"});
-//   }
-// }, 1000);
 
 export default App;

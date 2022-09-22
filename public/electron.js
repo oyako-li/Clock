@@ -24,8 +24,8 @@ function createWindow(){
 }
 function createSubWindow(){
     let _subWindow = new BrowserWindow({
-        width: 400,
-        height: 400,
+        width: 480,
+        height: 480,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
         }

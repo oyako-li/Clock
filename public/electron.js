@@ -14,7 +14,11 @@ let subWindow;
 function createWindow(){
     mainWindow = new BrowserWindow({
         width: 600,
-        height: 600,
+        height: 620,
+        frame: true,
+        resizable: true,
+        alwaysOnTop: true,
+        transparent: true,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
         }

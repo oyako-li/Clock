@@ -13,8 +13,8 @@ let subWindow;
   
 function createWindow(){
     mainWindow = new BrowserWindow({
-        width: 600,
-        height: 620,
+        width: 260,
+        height: 270,
         frame: true,
         resizable: true,
         alwaysOnTop: true,

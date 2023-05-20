@@ -1,94 +1,76 @@
-import './App.css';
-import {useState} from 'react';
+import './App_1.css';
+import {useEffect, useState} from 'react';
 
 
 const START_TITLE = "Let's get start";
 const BREAK_TITLE = "Take a break";
-let second=0;
-let day;
+let day = new Date();
 
 
 const TimeSign = () => {
   const items = [];
-  for(let i=1; i<13; i++) items.push(<span style={{"--i": i}}><b>{i}</b></span>);
+  for(let i=1; i<13; i++) items.push(<span style={{"--i": i+1.6}}><b>{i}</b></span>);
   return (
     <>
-      {items}
+        {items}
     </>
   )
 };
 
-const TimeHandrer = () => {
-  day = new Date();
+// const TimeHandrer = () => {
+//   return (
+//     <>
+
+//     </>
+//   )
+// }
+
+// const AlertSetting = () => {
+//   const [styles, setStyles] = useState({'--clr': '#43658b'});
+  
+//   async function handleAddAlerm() {
+//     await window.alertApi.load();
+//   }
+
+//   return (
+//     <div id='create-alert' className='alert' style={styles} onClick={()=>{handleAddAlerm()}}><p>+</p></div>
+//   )
+// }
+
+const App = () => {
   const [hh, setHh] = useState(day.getHours());
   const [mm, setMm] = useState(day.getMinutes());
   const [ss, setSs] = useState(day.getSeconds());
+  // set notifications
+  // useEffect(()=>{
+  //     if(ss===0) new Notification(START_TITLE, {body: "1mun"});
+  // }, [ss])
 
-  const clock = setInterval(clocks, 1000);
-
-  function clocks(){
-    day = new Date();
-    second = day.getSeconds();
-    setSs(second);
-    if(second===0){
-      setMm(day.getMinutes());
-      setHh(day.getHours());
-    }
-    clearInterval(clock);
-  }
-  
-
-  return (
-    <>
-      <div className="circle" id="mn" style={{"--clr": "#fee800", transform: `rotateZ(${mm*6}deg)`}}><i></i></div>;
-      <div className="circle circle2" id="hr" style={{"--clr": "#04fc43", transform: `rotateZ(${hh*30+(mm*6/12)}deg)`}}><i></i></div>;
-      <div className="circle circle3" id="sc" style={{"--clr": "#ff2972", transform: `rotateZ(${ss*6}deg)`}}><i></i></div>;
-    </>
-  )
-}
-
-const AlertSetting = () => {
-  const [styles, setStyles] = useState({'--clr': '#43658b'});
-  const [state, setState] = useState(false);
-  
-  function addAlerm() {
-    if(!state){
-      setStyles({'--clr': '#43658b', opacity: 0.7, borderRadius: '10%', width: '80%', height: '80%'});
-
-    }else{
-      setStyles({'--clr': '#43658b'});
-    }
-    setState(!state);
-  }
+  const clock = setInterval(()=>{
+      day = new Date();
+      setSs(day.getSeconds());
+      // console.log(ss);
+      if(ss===0){
+          setMm(day.getMinutes());
+          setHh(day.getHours());
+          // console.log(hh,mm);
+      }
+      clearInterval(clock);
+  }, 1000);
 
   return (
-    <div id='create-alert' className='alert' style={styles} onClick={()=>console.log('world')} ><p onClick={addAlerm}>+</p></div>
-  )
-}
-
-const App = () => {
-  return (
-    <div className='screen'>
+    <div className='container'>
       <div className="clock">
         <TimeSign />
-        <TimeHandrer />
+        <div className="circle" id="mn" style={{"--clr": "#fee800", transform: `rotateZ(${mm*6}deg)`}}>
+          <div className="circle circle2" id="hr" style={{"--clr": "#04fc43", transform: `rotateZ(${hh*30+mm/2-mm*6}deg)`}}>
+              <div className="circle circle3" id="sc" style={{"--clr": "#ff2972", transform: `rotateZ(${(ss-1)*6-hh*30-mm/2}deg)`}}></div>
+          </div>
+        </div>
       </div>
-      <AlertSetting />
+      {/* <AlertSetting /> */}
     </div>
   )
 };
-
-setInterval(()=>{
-  let minutes = day.getMinutes();
-  if(minutes===0){
-    new Notification(START_TITLE, {body: "0 time up, So you should start."}).show();
-  } else if(minutes===25){
-    new Notification(BREAK_TITLE, {body: "25 time up, So you should rest."}).show();
-  } else if(minutes===30){
-    new Notification(START_TITLE, {body: "30 time up, So you should start."}).show();
-  } else if(minutes===55){
-    new Notification(BREAK_TITLE, {body: "55 time up, So you should rest."}).show();
-  }
-}, 60000);
 
 export default App;
